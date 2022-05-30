@@ -1,23 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useEffect } from 'react';
+import { onMIDISuccess, onMIDIFailure } from './utils';
 import './App.css';
 
+//notes C -> B
+const level1Notes = [60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72];
+
 function App() {
+  useEffect(() => {
+    if(navigator.requestMIDIAccess){
+      console.log("Web midi is supported in this browser");
+      navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
+  } else {
+      console.log("Web midi is not supported");
+  }
+  }, [])
+
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          Midi test
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
     </div>
   );
