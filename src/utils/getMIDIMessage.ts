@@ -7,7 +7,7 @@ export function getMIDIMessage (message: any) {
 
   switch (command) {
     case 144:
-      console.log("NOTE IS OOOON");
+      console.log("note on")
       noteOnListener(note);
       break;
     default:
