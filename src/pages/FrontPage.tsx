@@ -3,6 +3,7 @@ import { Button } from "../components/Button";
 import { auth } from "../firebase-config";
 import AccessMidi from "../components/AccessMidi";
 import Keybed from "../components/Keybed";
+import DisplayChord from "../components/DisplayChord";
 
 export function FrontPage() {
     let pianoRef: HTMLDivElement;
@@ -21,6 +22,8 @@ export function FrontPage() {
                 ></div>
                 <h1>The Really Nice Midi App</h1>
                 <AccessMidi />
+                <DisplayChord />
+                <Keybed />
 
                 {/* <Button onClick={() => auth.signOut()}>
                     <i

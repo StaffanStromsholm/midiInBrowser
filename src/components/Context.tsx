@@ -18,9 +18,9 @@ export const Context = React.createContext<AppContextInterface | null>(null);
 
 export const Provider = (props: AuthProverProps) => {
     const [currentUser, setCurrentUser] = useState<User | null>(null);
-    const [currentMidiNotes, setCurrentMidiNotes] = useState<number[] | null>([
-        -1,
-    ]);
+    const [currentMidiNotes, setCurrentMidiNotes] = useState<number[] | null>(
+        null
+    );
     const [pending, setPending] = useState<boolean>(true);
 
     useEffect(() => {

@@ -2,7 +2,6 @@ import React, { ReactNode, useContext, useState } from "react";
 import { onMIDISuccess, onMIDIFailure, getMidiMessage } from "../utils";
 import { Button } from "./Button";
 import { Font } from "./Font";
-import Keybed from "./Keybed";
 import { Context } from "../components/Context";
 
 function AccessMidi(props: any) {
@@ -17,7 +16,13 @@ function AccessMidi(props: any) {
 
         switch (command) {
             case 144:
-                context?.setCurrentMidiNotes((old: any) => [...old, note]);
+                context?.setCurrentMidiNotes((old: any) => {
+                    if (old) {
+                        return [...old, note].sort();
+                    } else {
+                        return [note];
+                    }
+                });
                 break;
             case 128:
                 context?.setCurrentMidiNotes((old: any) =>
@@ -59,7 +64,6 @@ function AccessMidi(props: any) {
             )}
             <br />
             <br />
-            <Keybed />
         </>
     );
 }

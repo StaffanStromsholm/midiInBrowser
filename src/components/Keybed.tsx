@@ -1,19 +1,14 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { Context } from "../components/Context";
+import { blackKeys, mapNumberOfKeysToCcValues } from "../utils/noteMappers";
 import { BlackKey } from "./BlackKey";
 import { WhiteKey } from "./WhiteKey";
-
-const numberOfKeys = 87;
-const blackKeys = [
-    1, 4, 6, 9, 11, 13, 16, 18, 21, 23, 25, 28, 30, 33, 35, 37, 40, 42, 45, 47,
-    49, 52, 54, 57, 59, 61, 64, 66, 69, 71, 73, 76, 78, 81, 83, 85,
-];
 
 const KeybedContainer = styled.div`
     display: flex;
     padding: 10px;
-    background-color: rgba(255, 255, 255, 0.5);
+    // background-color: rgba(255, 255, 255, 0.5);
 `;
 
 function Keybed(props: any) {
@@ -23,21 +18,25 @@ function Keybed(props: any) {
         if (blackKeys.includes(props.value))
             return (
                 <BlackKey
-                    $active={context?.currentMidiNotes.includes(
-                        props.value + 21
-                    )} // +21 because of the actual CC values
+                    $active={
+                        context?.currentMidiNotes &&
+                        context?.currentMidiNotes.includes(props.value)
+                    }
                 />
             );
         return (
             <WhiteKey
-                $active={context?.currentMidiNotes.includes(props.value + 21)} // +21 because of the actual CC values
+                $active={
+                    context?.currentMidiNotes &&
+                    context?.currentMidiNotes.includes(props.value)
+                }
             />
         );
     }
 
     const keys: any[] = [];
 
-    for (let i = 0; i <= numberOfKeys; i++) {
+    for (let i = 21; i < mapNumberOfKeysToCcValues; i++) {
         keys.push(<Key key={i} value={i} />);
     }
 

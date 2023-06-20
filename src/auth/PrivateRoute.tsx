@@ -1,6 +1,6 @@
 import React, { Children, useContext } from "react";
 import { Route, Navigate, Routes, useLocation } from "react-router-dom";
-import { Context } from "./Context";
+import { Context } from "../components/Context";
 
 const PrivateRoute = ({ children }: { children: JSX.Element }) => {
     const { currentUser } = useContext<any>(Context);
