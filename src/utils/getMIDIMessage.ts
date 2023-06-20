@@ -1,16 +1,27 @@
-import { noteOnListener } from ".";
+export function getMidiMessage(message: any) {
+    const command = message.data[0];
+    const note = message.data[1];
+    const velocity = message.data[2];
+    const currentNotes: number[] = [];
 
-export function getMIDIMessage (message: any) {
-  const command = message.data[0];
-  const note = message.data[1];
-  const velocity = message.data[2];
+    switch (command) {
+        case 144:
+            // noteOnListener(note);
+            if (!currentNotes.includes(note)) {
+                currentNotes.push(note);
+            }
+            console.log(currentNotes);
 
-  switch (command) {
-    case 144:
-      console.log("note on")
-      noteOnListener(note);
-      break;
-    default:
-      break;
-  }
+            break;
+        case 128:
+            // console.log("note off");
+            // noteOffListener(note);
+            if (!currentNotes.includes(note)) return;
+            currentNotes.splice(currentNotes.indexOf(note), 1);
+
+            console.log(currentNotes);
+            break;
+        default:
+            break;
+    }
 }
